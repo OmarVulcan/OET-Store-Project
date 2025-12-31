@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Gaming Laptop",
+        "price": 1200,
+        "image": "https://placehold.co/300x200/png?text=Laptop"
+    },
+    {
+        "id": 2,
+        "name": "Wireless Headphones",
+        "price": 150,
+        "image": "https://placehold.co/300x200/png?text=Headphones"
+    },
+    {
+        "id": 3,
+        "name": "Smart Watch",
+        "price": 250,
+        "image": "https://placehold.co/300x200/png?text=Smart+Watch"
+    },
+    {
+        "id": 4,
+        "name": "4K Monitor",
+        "price": 300,
+        "image": "https://placehold.co/300x200/png?text=Monitor"
+    },
+    {
+        "id": 5,
+        "name": "Mechanical Keyboard",
+        "price": 100,
+        "image": "https://placehold.co/300x200/png?text=Keyboard"
+    },
+    {
+        "id": 6,
+        "name": "Gaming Mouse",
+        "price": 80,
+        "image": "https://placehold.co/300x200/png?text=Mouse"
+    }
+]

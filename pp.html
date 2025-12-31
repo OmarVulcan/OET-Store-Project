@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <link rel="stylesheet" href="pp_stle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <h2>Create Account</h2>
+
+        <form id="signupForm">
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+
+        <p id="msg"></p>
+    </div>
+
+    <script>
+        $("#signupForm").submit(function (e) {
+            e.preventDefault();
+
+            const username = $("input[name='username']").val();
+            const email = $("input[name='email']").val();
+            const password = $("input[name='password']").val();
+            const msg = $("#msg");
+
+            msg.text('');
+
+            // Send to PHP Backend for Registration
+            $.post('api/register.php', {
+                username: username,
+                email: email,
+                password: password
+            }, function (response) {
+                if (response.success === true) {
+                    msg.css('color', '#4ade80').text(response.message + ' Redirecting to login...');
+
+                    // Redirect to login page after successful registration
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                } else {
+                    msg.css('color', '#ff4d4d').text(response.message);
+                }
+            }, 'json')
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Registration Error:", textStatus, errorThrown);
+                    console.log("Response Text:", jqXHR.responseText);
+                    msg.css('color', '#ff4d4d').text('Server Error. Check console (F12) or PHP logs.');
+                });
+        });
+    </script>
+
+    <nav class="navbar">
+        <div class="logo">OET Store</div>
+
+        <div class="nav-links">
+            <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="browse.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> Browse</a>
+            <a href="pp.html" class="nav-item"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+            <a href="login.html" class="nav-item"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="Contact.html" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+    </nav>
+
+
+    <script src="auth.js"></script>
+</body>
+
+</html>

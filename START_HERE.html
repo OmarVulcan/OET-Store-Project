@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OET Store - Start Here</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(15, 32, 39, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00c6ff;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #b0c4d8;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 4px solid #00c6ff;
+        }
+
+        .step h2 {
+            color: #00c6ff;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 114, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .checklist {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .checklist li {
+            color: #4ade80;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="success-icon">🎉</div>
+        <h1>Welcome!</h1>
+        <p class="subtitle">Your OET Store is ready to set up</p>
+
+        <div class="step">
+            <h2>✅ Files Copied Successfully!</h2>
+            <p>All project files have been moved to the correct location:</p>
+            <p style="margin-top: 10px; color: #00c6ff; font-weight: 600;">C:\xampp\htdocs\py\</p>
+        </div>
+
+        <div class="step">
+            <h2>📋 Next Steps:</h2>
+            <ol class="checklist">
+                <li>Make sure XAMPP Apache and MySQL are running</li>
+                <li>Click "Setup Database" below to create the database</li>
+                <li>Register a new account</li>
+                <li>Start shopping!</li>
+            </ol>
+        </div>
+
+        <div class="btn-group">
+            <a href="database_setup.html" class="btn btn-primary">
+                🗄️ Setup Database
+            </a>
+            <a href="test_system.html" class="btn btn-secondary">
+                🧪 Test System
+            </a>
+        </div>
+
+        <div class="btn-group" style="margin-top: 15px;">
+            <a href="home.html" class="btn btn-secondary">
+                🏠 Go to Home
+            </a>
+            <a href="pp.html" class="btn btn-secondary">
+                📝 Register
+            </a>
+            <a href="login.html" class="btn btn-secondary">
+                🔐 Login
+            </a>
+        </div>
+
+        <p style="margin-top: 30px; color: #94a3b8; font-size: 14px;">
+            📚 For detailed instructions, check the documentation files in the project folder
+        </p>
+    </div>
+
+    <script>
+        // Auto-redirect to database setup after 3 seconds if user doesn't click
+        setTimeout(() => {
+            if (confirm('Ready to setup the database? Click OK to continue or Cancel to stay here.')) {
+                window.location.href = 'database_setup.html';
+            }
+        }, 3000);
+    </script>
+</body>
+
+</html>

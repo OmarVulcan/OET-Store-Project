@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Test - OET Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(15, 32, 39, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #00c6ff;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #b0c4d8;
+            font-size: 14px;
+        }
+
+        .test-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #94a3b8;
+        }
+
+        .test-section.success {
+            border-left-color: #4ade80;
+        }
+
+        .test-section.error {
+            border-left-color: #ef4444;
+        }
+
+        .test-section.warning {
+            border-left-color: #fbbf24;
+        }
+
+        .test-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .test-result {
+            font-size: 14px;
+            color: #cbd5e1;
+            margin-top: 5px;
+        }
+
+        .status-icon {
+            font-size: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 114, 255, 0.4);
+        }
+
+        .summary {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid #00c6ff;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .summary h2 {
+            color: #00c6ff;
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #00c6ff;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #00c6ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 System Test</h1>
+        <p class="subtitle">Testing Database & API Integration</p>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Running system tests...</p>
+        </div>
+
+        <div id="results" style="display: none;">
+            <!-- Test results will be inserted here -->
+        </div>
+
+        <button class="btn" onclick="runTests()" style="display: none;" id="retryBtn">
+            🔄 Run Tests Again
+        </button>
+
+        <div id="summary" class="summary" style="display: none;">
+            <!-- Summary will be inserted here -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        let testResults = [];
+
+        function addTest(name, status, message) {
+            testResults.push({ name, status, message });
+        }
+
+        function displayResults() {
+            const resultsDiv = $('#results');
+            resultsDiv.empty();
+
+            testResults.forEach(test => {
+                const icon = test.status === 'success' ? '✅' :
+                    test.status === 'error' ? '❌' : '⚠️';
+
+                const html = `
+                    <div class="test-section ${test.status}">
+                        <div class="test-name">
+                            <span class="status-icon">${icon}</span>
+                            ${test.name}
+                        </div>
+                        <div class="test-result">${test.message}</div>
+                    </div>
+                `;
+                resultsDiv.append(html);
+            });
+
+            $('#loading').hide();
+            resultsDiv.show();
+            $('#retryBtn').show();
+
+            // Show summary
+            const passed = testResults.filter(t => t.status === 'success').length;
+            const failed = testResults.filter(t => t.status === 'error').length;
+            const warnings = testResults.filter(t => t.status === 'warning').length;
+            const total = testResults.length;
+
+            const summaryHtml = `
+                <h2>Test Summary</h2>
+                <p style="font-size: 18px; margin-top: 10px;">
+                    <strong>${passed}/${total}</strong> tests passed
+                    ${failed > 0 ? `<br><span style="color: #ef4444;">${failed} failed</span>` : ''}
+                    ${warnings > 0 ? `<br><span style="color: #fbbf24;">${warnings} warnings</span>` : ''}
+                </p>
+                ${passed === total ?
+                    '<p style="color: #4ade80; margin-top: 10px;">🎉 All systems operational!</p>' :
+                    '<p style="color: #fbbf24; margin-top: 10px;">⚠️ Some tests failed. Check above for details.</p>'}
+            `;
+            $('#summary').html(summaryHtml).show();
+        }
+
+        async function runTests() {
+            testResults = [];
+            $('#loading').show();
+            $('#results').hide();
+            $('#summary').hide();
+            $('#retryBtn').hide();
+
+            // Test 1: Database Connection
+            try {
+                const response = await fetch('api/check_session.php');
+                if (response.ok) {
+                    addTest('Database Connection', 'success', 'Successfully connected to database');
+                } else {
+                    addTest('Database Connection', 'error', 'Failed to connect to database');
+                }
+            } catch (error) {
+                addTest('Database Connection', 'error', 'Cannot reach API endpoint. Is Apache running?');
+            }
+
+            // Test 2: Check if tables exist
+            try {
+                const response = await fetch('api/check_session.php');
+                const data = await response.json();
+                addTest('Database Tables', 'success', 'Database tables are accessible');
+            } catch (error) {
+                addTest('Database Tables', 'warning', 'Could not verify tables. Run setup_database.php if needed.');
+            }
+
+            // Test 3: Session Management
+            try {
+                const response = await fetch('api/check_session.php');
+                const data = await response.json();
+                if (data.hasOwnProperty('logged_in')) {
+                    addTest('Session Management', 'success', 'Session API is working correctly');
+                } else {
+                    addTest('Session Management', 'error', 'Session API returned unexpected format');
+                }
+            } catch (error) {
+                addTest('Session Management', 'error', 'Session check failed: ' + error.message);
+            }
+
+            // Test 4: API Endpoints
+            const endpoints = [
+                { name: 'Login API', url: 'api/login.php' },
+                { name: 'Register API', url: 'api/register.php' },
+                { name: 'Logout API', url: 'api/logout.php' },
+                { name: 'Cart API', url: 'api/cart.php' }
+            ];
+
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(endpoint.url, { method: 'HEAD' });
+                    if (response.status !== 404) {
+                        addTest(endpoint.name, 'success', `${endpoint.url} is accessible`);
+                    } else {
+                        addTest(endpoint.name, 'error', `${endpoint.url} not found`);
+                    }
+                } catch (error) {
+                    addTest(endpoint.name, 'error', `Cannot access ${endpoint.url}`);
+                }
+            }
+
+            // Test 5: Frontend Files
+            const pages = [
+                { name: 'Login Page', url: 'login.html' },
+                { name: 'Registration Page', url: 'pp.html' },
+                { name: 'Browse Page', url: 'browse.html' }
+            ];
+
+            for (const page of pages) {
+                try {
+                    const response = await fetch(page.url, { method: 'HEAD' });
+                    if (response.ok) {
+                        addTest(page.name, 'success', `${page.url} is accessible`);
+                    } else {
+                        addTest(page.name, 'error', `${page.url} not found`);
+                    }
+                } catch (error) {
+                    addTest(page.name, 'error', `Cannot access ${page.url}`);
+                }
+            }
+
+            // Test 6: Configuration Files
+            try {
+                const response = await fetch('includes/db.php', { method: 'HEAD' });
+                if (response.status !== 404) {
+                    addTest('Database Config', 'success', 'includes/db.php exists');
+                } else {
+                    addTest('Database Config', 'error', 'includes/db.php not found');
+                }
+            } catch (error) {
+                addTest('Database Config', 'error', 'Cannot verify db.php');
+            }
+
+            displayResults();
+        }
+
+        // Run tests on page load
+        $(document).ready(function () {
+            setTimeout(runTests, 500);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin:0; padding:0; }
+body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; padding-top: 80px; min-height: 100vh; }
+
+/* Navbar */
+.navbar { position: fixed; top: 0; left: 0; width: 100%; height: 65px; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+display: flex; align-items: center; justify-content: space-between; padding: 0 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); z-index: 1000; }
+.navbar .logo { font-size: 22px; font-weight: 700; letter-spacing: 1px;
+color: #fff; background: linear-gradient(90deg, #fff, #ffd700, #fff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 2s linear infinite; }
+@keyframes shine {0% { background-position: 200% center; } 100% { background-position: -200% center; }}
+.nav-links { display: flex; gap: 25px; }
+.nav-item { display: flex; align-items: center; gap: 8px; color: #cbd5e1; text-decoration: none; font-size: 14px; padding: 8px 14px; border-radius: 8px; transition: 0.3s; }
+.nav-item i { font-size: 16px; }
+.nav-item:hover { background: linear-gradient(135deg, #00c6ff, #0072ff); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4); }
+
+/* Checkout Form */
+.checkout-container { background: rgba(15,32,39,0.85); backdrop-filter: blur(10px); padding: 40px; width: 400px; margin: 50px auto; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+.checkout-container h2 { text-align: center; margin-bottom: 30px; font-weight: 600; }
+.input-group { margin-bottom: 20px; display: flex; flex-direction: column; }
+.input-group label { margin-bottom: 5px; }
+.input-group input { padding: 12px 15px; border-radius: 8px; border: none; outline: none; background: #1c2b36; color: #fff; font-size: 14px; }
+.checkout-btn { width: 100%; padding: 12px; border: none; border-radius: 8px; background: linear-gradient(135deg, #00c6ff, #0072ff); color: #fff; font-size: 15px; font-weight: 500; cursor: pointer; transition: 0.3s; }
+.checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,114,255,0.4); }
+#msg { margin-top: 15px; text-align: center; font-size: 14px; color: #4ade80; }

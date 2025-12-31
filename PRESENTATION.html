@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OET Store Project Presentation</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --accent: #3b82f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease-in-out;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        ul {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+
+        .controls {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        button {
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--secondary);
+        }
+
+        button:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .card {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: left;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: #e2e8f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slide-container">
+        <div class="progress" id="progressBar"></div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>OET Store Project</h1>
+            <h2>Modern E-Commerce Solution</h2>
+            <p style="font-size: 1.5rem; color: #64748b;">Secure. Scalable. User-Friendly.</p>
+        </div>
+
+        <!-- Slide 2: Project Overview -->
+        <div class="slide">
+            <h2>Project Overview</h2>
+            <ul>
+                <li>A comprehensive e-commerce platform revamp.</li>
+                <li>Transitioned from legacy file-based storage to a robust MySQL database.</li>
+                <li>Implemented enterprise-grade security and authentication.</li>
+                <li>Designed for scalability and seamless user experience.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Key Features -->
+        <div class="slide">
+            <h2>Key Features</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🔐 Secure Authentication</h3>
+                    <p>Registration, login, and session management with bcrypt password hashing.</p>
+                </div>
+                <div class="card">
+                    <h3>🛒 Smart Cart</h3>
+                    <p>Persistent shopping cart that saves items across devices and sessions.</p>
+                </div>
+                <div class="card">
+                    <h3>💾 Database Backend</h3>
+                    <p>Structured MySQL database for users, orders, and products.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Modern API</h3>
+                    <p>RESTful PHP API endpoints for frontend-backend communication.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Technical Architecture -->
+        <div class="slide">
+            <h2>Technical Architecture</h2>
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, CSS3, Modern JavaScript</li>
+                <li><strong>Backend:</strong> PHP 7/8 (PDO enabled)</li>
+                <li><strong>Database:</strong> MySQL / MariaDB</li>
+                <li><strong>Architecture:</strong> REST API separation</li>
+                <li><strong>Security:</strong> Prepared statements, Session security, Input sanitization</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Database Schema -->
+        <div class="slide">
+            <h2>Database Schema</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Users & Auth</h3>
+                    <p><code>users</code> table with secure hashed credentials and profile data.</p>
+                </div>
+                <div class="card">
+                    <h3>Commerce</h3>
+                    <p><code>cart</code>, <code>orders</code>, and <code>order_items</code> for transaction management.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>User Data</h3>
+                    <p><code>lists</code> and <code>list_items</code> for user watchlists/favorites.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Security Improvements -->
+        <div class="slide">
+            <h2>Security Improvements</h2>
+            <ul>
+                <li><strong>Old System:</strong> Plain text files, no encryption, vulnerable.</li>
+                <li><strong>New System:</strong>
+                    <ul>
+                        <li>Bcrypt Password Hashing</li>
+                        <li>SQL Injection Protection (Prepared Statements)</li>
+                        <li>Secure Session Handling</li>
+                        <li>XSS Protection & Input Validation</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Setup & Deployment -->
+        <div class="slide">
+            <h2>Easy Setup</h2>
+            <ol style="font-size: 1.5rem; line-height: 1.8;">
+                <li>1. Install XAMPP/WAMP.</li>
+                <li>2. Place files in <code>htdocs</code>.</li>
+                <li>3. Visit <code>database_setup.html</code> to auto-configure DB.</li>
+                <li>4. Start using the secure store!</li>
+            </ol>
+        </div>
+
+        <!-- Slide 8: Future Roadmap -->
+        <div class="slide">
+            <h2>Future Roadmap</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Phase 1 (Done)</h3>
+                    <p>Core Auth, DB, Cart</p>
+                </div>
+                <div class="card">
+                    <h3>Phase 2</h3>
+                    <p>Payment Integration, Admin Dashboard</p>
+                </div>
+                <div class="card">
+                    <h3>Phase 3</h3>
+                    <p>Search, Analytics, User Reviews</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Conclusion -->
+        <div class="slide">
+            <h1>Thank You!</h1>
+            <p style="font-size: 1.5rem; margin-top: 1rem;">Any Questions?</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">Previous</button>
+        <span id="slideCounter" style="display: flex; align-items: center; font-weight: bold;">1 / 9</span>
+        <button id="nextBtn" onclick="changeSlide(1)">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const counter = document.getElementById('slideCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            // Update progress bar
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Update counter
+            counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+            // Update buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            updateSlide();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+
+</body>
+
+</html>

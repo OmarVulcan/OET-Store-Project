@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: 600;
+            color: #00c6ff;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        /* Login Form */
+        .login-container {
+            background: rgba(15, 32, 39, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            width: 360px;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background: #1c2b36;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .input-group input::placeholder {
+            color: #b0c4d8;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: #b0c4d8;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .forgot-password:hover {
+            color: #00c6ff;
+        }
+
+        #msg {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #4ade80;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OET Store</div>
+        <div class="nav-links">
+            <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="browse.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> Browse</a>
+            <a href="pp.html" class="nav-item"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+            <a href="login.html" class="nav-item"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="Contact.html" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group"><input type="email" name="email" placeholder="Email" required></div>
+            <div class="input-group"><input type="password" name="password" placeholder="Password" required></div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <p id="msg"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $('#loginForm').on('submit', function (e) {
+            e.preventDefault();
+
+            // Clear previous messages
+            const msg = $('#msg');
+            msg.text('');
+
+            const email = $(this).find('input[name="email"]').val();
+            const password = $(this).find('input[name="password"]').val();
+
+            // Send to PHP Backend for Verification
+            $.post('api/login.php', {
+                username: email, // API accepts username or email
+                password: password
+            }, function (response) {
+                if (response.success === true) {
+                    msg.css('color', '#4ade80').text(response.message + " Redirecting...");
+
+                    // Set LocalStorage for Frontend Persistence
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', response.username);
+                    localStorage.setItem('email', response.email);
+                    localStorage.setItem('userId', response.user_id);
+
+                    setTimeout(() => {
+                        window.location.href = 'browse.html';
+                    }, 1500);
+                } else {
+                    msg.css('color', '#ff4d4d').text(response.message);
+                }
+            }, 'json')
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Login Error:", textStatus, errorThrown);
+                    console.log("Response Text:", jqXHR.responseText);
+                    msg.css('color', '#ff4d4d').text('Server Error. Check console (F12) or PHP logs.');
+                });
+        });
+    </script>
+
+    <script src="auth.js"></script>
+</body>
+
+</html>

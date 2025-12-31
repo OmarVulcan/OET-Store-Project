@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 50px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: 600;
+            color: #00c6ff;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        .profile-container {
+            background: rgba(15, 32, 39, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            width: 500px;
+            margin: 50px auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .profile-icon {
+            font-size: 80px;
+            color: #00c6ff;
+            margin-bottom: 20px;
+        }
+
+        .profile-container h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .info-group {
+            text-align: left;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-val {
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .logout-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .logout-btn:hover {
+            background: #ff6b81;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OET Store</div>
+        <div class="nav-links">
+            <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="browse.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> Browse</a>
+            <a href="pp.html" class="nav-item"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+            <a href="login.html" class="nav-item"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="Contact.html" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-icon"><i class="fa-solid fa-circle-user"></i></div>
+        <h2>My Profile</h2>
+
+        <div class="info-group">
+            <span class="info-label">Username</span>
+            <div class="info-val" id="u-name">Loading...</div>
+        </div>
+
+        <div class="info-group">
+            <span class="info-label">Email</span>
+            <div class="info-val" id="u-email">Loading...</div>
+        </div>
+
+        <div class="info-group">
+            <span class="info-label">Saved Card Number</span>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <input type="text" id="card-input" placeholder="Enter Card Number"
+                    style="width: 100%; padding: 8px; border-radius: 5px; border: none; background: #334; color: white;">
+                <button id="save-card-btn"
+                    style="background: #00c6ff; border: none; padding: 0 15px; border-radius: 5px; font-weight: 600; cursor: pointer;">Save</button>
+            </div>
+            <p id="card-msg" style="font-size: 12px; margin-top: 5px; height: 15px; color: #4ade80;"></p>
+        </div>
+
+        <button id="logout-btn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+
+        <div class="history-container" style="margin-top:40px; text-align:left;">
+            <h3 style="border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:10px; margin-bottom:20px;">Order
+                History</h3>
+            <div id="order-list">
+                <!-- Orders go here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Auth Script -->
+    <script src="auth.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Load data
+            const username = localStorage.getItem('username') || 'Guest';
+            const email = localStorage.getItem('email') || 'Not provided';
+
+            $('#u-name').text(username);
+            $('#u-email').text(email);
+
+            // Load Saved Card
+            const savedCard = localStorage.getItem('savedCard') || '';
+            $('#card-input').val(savedCard);
+
+            // Save Card Handler
+            $('#save-card-btn').click(function () {
+                const cardNum = $('#card-input').val();
+                localStorage.setItem('savedCard', cardNum);
+                $('#card-msg').text('Card saved successfully!').fadeIn().delay(2000).fadeOut();
+            });
+
+            // Load History
+            const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+            if (history.length === 0) {
+                $('#order-list').html('<p style="color:#cbd5e1; font-size:14px;">No past orders found.</p>');
+            } else {
+                history.reverse().forEach(order => {
+                    const itemsList = order.items.map(i => i.name).join(', ');
+                    const html = `
+                    <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px; margin-bottom:15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                            <span style="color:#00c6ff; font-weight:600;">${order.date}</span>
+                            <span style="color:#4ade80; font-weight:600;">$${order.total}</span>
+                        </div>
+                        <p style="color:#cbd5e1; font-size:13px; margin:0;">${itemsList}</p>
+                    </div>
+                `;
+                    $('#order-list').append(html);
+                });
+            }
+
+            // Logout
+            $('#logout-btn').click(function () {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                localStorage.removeItem('email');
+                window.location.href = 'home.html';
+            });
+        });
+    </script>
+
+</body>
+
+</html>

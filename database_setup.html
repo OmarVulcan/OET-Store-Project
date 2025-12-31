@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Setup - OET Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(15, 32, 39, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #00c6ff;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #b0c4d8;
+            font-size: 14px;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #00c6ff;
+        }
+
+        .step h3 {
+            color: #00c6ff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .step p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .step code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #4ade80;
+            font-size: 13px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 114, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status.success {
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid #4ade80;
+            color: #4ade80;
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #cbd5e1;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .warning {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid #fbbf24;
+            color: #fbbf24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .warning strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🗄️ Database Setup</h1>
+        <p class="subtitle">OET Store - MySQL Database Configuration</p>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong>
+            Make sure XAMPP or WAMP is installed and both Apache and MySQL services are running before proceeding.
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Prerequisites</h3>
+            <p>Ensure you have the following installed and running:</p>
+            <ul class="checklist">
+                <li>XAMPP or WAMP Server</li>
+                <li>Apache Web Server (running)</li>
+                <li>MySQL Database Server (running)</li>
+                <li>PHP 7.4 or higher</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Database Configuration</h3>
+            <p>The database will be created with the following settings:</p>
+            <p><strong>Database Name:</strong> <code>oet_store</code></p>
+            <p><strong>Host:</strong> <code>localhost</code></p>
+            <p><strong>Username:</strong> <code>root</code></p>
+            <p><strong>Password:</strong> <code>(empty)</code></p>
+            <p style="margin-top: 10px; font-size: 13px; color: #94a3b8;">
+                If your MySQL uses different credentials, update them in <code>includes/db.php</code>
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Tables to be Created</h3>
+            <p>The following tables will be created:</p>
+            <ul class="checklist">
+                <li><strong>users</strong> - User accounts with secure password hashing</li>
+                <li><strong>lists</strong> - User watchlists</li>
+                <li><strong>list_items</strong> - Items in watchlists</li>
+                <li><strong>cart</strong> - Shopping cart items</li>
+                <li><strong>orders</strong> - Completed orders</li>
+                <li><strong>order_items</strong> - Items in orders</li>
+            </ul>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="setupDatabase()">
+                🚀 Setup Database Now
+            </button>
+            <a href="home.html" class="btn btn-secondary">
+                🏠 Go to Home
+            </a>
+            <a href="login.html" class="btn btn-secondary">
+                🔐 Go to Login
+            </a>
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        function setupDatabase() {
+            const statusDiv = $('#status');
+            statusDiv.removeClass('success error').hide();
+            statusDiv.html('⏳ Setting up database... Please wait...').show();
+
+            $.get('setup_database.php', function (response) {
+                statusDiv.removeClass('error').addClass('success');
+                statusDiv.html('<strong>✓ Success!</strong><br>' + response);
+
+                setTimeout(() => {
+                    if (confirm('Database setup complete! Would you like to go to the registration page?')) {
+                        window.location.href = 'pp.html';
+                    }
+                }, 1500);
+            }).fail(function (xhr, status, error) {
+                statusDiv.removeClass('success').addClass('error');
+                statusDiv.html('<strong>✗ Error:</strong><br>' +
+                    'Failed to setup database. Please check:<br>' +
+                    '• MySQL is running in XAMPP/WAMP<br>' +
+                    '• Database credentials in includes/db.php are correct<br>' +
+                    '• You have permission to create databases<br><br>' +
+                    'Error details: ' + error);
+                statusDiv.show();
+            });
+        }
+
+        // Check if database is already set up
+        $(document).ready(function () {
+            $.get('api/check_session.php', function (response) {
+                // If API responds, database is likely set up
+                const statusDiv = $('#status');
+                statusDiv.removeClass('error').addClass('success');
+                statusDiv.html('<strong>✓ Database appears to be already configured!</strong><br>' +
+                    'You can proceed to use the application or run setup again to reset.');
+                statusDiv.show();
+            }).fail(function () {
+                // Database might not be set up yet
+            });
+        });
+    </script>
+</body>
+
+</html>

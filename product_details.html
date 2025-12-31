@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is loaded -->
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 50px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: 600;
+            color: #00c6ff;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        .details-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .product-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-section h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .info-section .price {
+            font-size: 28px;
+            color: #00c6ff;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .info-section .desc {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        .add-cart-large-btn {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.3);
+        }
+
+        .add-cart-large-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 114, 255, 0.5);
+        }
+
+        .reviews-section {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(15, 32, 39, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .reviews-section h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-user {
+            font-weight: 600;
+            color: #00c6ff;
+            margin-bottom: 5px;
+        }
+
+        .review-stars {
+            color: #ffd700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OET Store</div>
+        <div class="nav-links">
+            <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="browse.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> Browse</a>
+            <a href="pp.html" class="nav-item"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+            <a href="login.html" class="nav-item"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a href="Contact.html" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+    </nav>
+
+    <div class="details-container">
+        <div class="img-section">
+            <img id="p-img" src="" alt="" class="product-img">
+        </div>
+        <div class="info-section">
+            <h1 id="p-name">Loading...</h1>
+            <div class="price" id="p-price">$...</div>
+            <p class="desc" id="p-desc">...</p>
+            <button id="add-btn" class="add-cart-large-btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="reviews-section">
+        <h3>User Reviews</h3>
+        <div id="reviews-list">
+            <!-- Reviews go here -->
+        </div>
+    </div>
+
+    <script src="products.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Get ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id')); // Products in JS are numbers
+
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                $('#p-img').attr('src', product.image);
+                $('#p-name').text(product.name);
+                $('#p-price').text('$' + product.price);
+                $('#p-desc').text(product.description || "No description available.");
+
+                // Reviews
+                if (product.reviews && product.reviews.length > 0) {
+                    product.reviews.forEach(r => {
+                        const stars = '<i class="fa-solid fa-star"></i>'.repeat(r.rating) + '<i class="fa-regular fa-star"></i>'.repeat(5 - r.rating);
+                        $('#reviews-list').append(`
+                        <div class="review-item">
+                            <div class="review-user">${r.user}</div>
+                            <div class="review-stars">${stars}</div>
+                            <div class="review-text">${r.comment}</div>
+                        </div>
+                    `);
+                    });
+                } else {
+                    $('#reviews-list').html('<p style="color:#777;">No reviews yet for this product.</p>');
+                }
+
+                // Add to Cart
+                $('#add-btn').click(function () {
+                    const isLoggedIn = localStorage.getItem('isLoggedIn');
+                    if (!isLoggedIn) {
+                        alert('You need to Sign Up/Login to add items to the cart!');
+                        window.location.href = 'pp.html';
+                        return;
+                    }
+
+                    // Get existing items
+                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+                    // Add new item
+                    cartItems.push({ name: product.name, price: product.price });
+
+                    // Save back
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+                    $(this).html('<i class="fa-solid fa-check"></i> Added');
+                    setTimeout(() => {
+                        $(this).html('<i class="fa-solid fa-cart-plus"></i> Add to Cart');
+                    }, 1000);
+                });
+
+            } else {
+                $('.details-container').html('<h2>Product not found. <a href="browse.html" style="color:#00c6ff;">Go Back</a></h2>');
+            }
+        });
+    </script>
+
+    <script src="auth.js"></script>
+</body>
+
+</html>
